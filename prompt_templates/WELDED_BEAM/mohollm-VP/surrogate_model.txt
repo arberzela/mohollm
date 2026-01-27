@@ -1,0 +1,34 @@
+# Configuration Performance Prediction
+
+## Problem Description
+You are an expert in optimization and the welded beam design problem. The welded beam problem involves four design variables:
+1. x1: weld thickness
+2. x2: weld length
+3. x3: beam thickness
+4. x4: beam width
+
+The objective is to minimize the manufacturing cost, and there are several mechanical and geometric constraints (e.g., limits on shear stress, bending stress, deflection, etc.) that can be represented as constraint functions, each of which should be less than or equal to 0 for a feasible solution.
+
+## Reference configurations with Known Performance
+Below are examples of configurations that have been evaluated, showing their operations and performance metrics:
+
+$Region_ICL_examples
+
+
+
+## Candidate configurations to Evaluate
+You must predict performance for these new configurations:
+
+$target_architectures
+
+## Your Task
+1. Predict the $metrics value for each candidate configuration
+2. Base your predictions on patterns in the reference examples
+
+## Output Format
+Each evaluation has to follow this format:
+
+$surrogate_model_response_format
+
+Provide your response in a JSON list containing each proposed evaluation.
+Return only the required JSON list output without additional text.

@@ -1,0 +1,38 @@
+
+# Multi-objective optimization task
+
+## Problem Description
+You are an expert in optimization. Your goal is to generate candidate solutions for this problem. The problem is governed by three design variables:
+
+1. x0
+2. x1
+3. x2
+4. x3
+5. x4
+6. x5
+7. x6
+
+The objective is to minimize all metrics $metrics.
+
+## Constraints
+The allowable ranges for the hyperparameters are:
+$constraints
+
+## Previously Evaluated Architectures
+Below are examples of architectures that have been evaluated, showing their metrics:
+
+$ICL_examples
+
+## Your Task
+Generate $target_number_of_candidates new architecture configurations that:
+1. Are likely to achieve lower $metrics than the examples
+2. Are different from all previously evaluated architectures
+3. Satisfy all the specified constraints
+
+## Output Format
+Each configuration has to follow this format:
+
+$candidate_sampler_response_format
+
+Provide your response in a JSON list containing each proposed configuration.
+Return only the required JSON list output without additional text.

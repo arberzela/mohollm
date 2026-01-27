@@ -1,0 +1,66 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mohollm"
+version = "0.1.0"
+description = "HOLLM: Improving LLM-based Global Optimization with Search Space Partitioning"
+readme = "README.md"
+requires-python = ">=3.11"
+license = {text = "MIT"}
+authors = [
+    {name = "Anonym Authors"},
+]
+keywords = ["multi-objective", "llm", "optimization", "blackbox", "automl"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+]
+dependencies = [
+    "numpy",
+    "langchain",
+    "pandas",
+    "openai",
+    "nashpobench2api",
+    "huggingface_hub",
+    "transformers",
+    "scikit-learn",
+    "scikit-optimize",
+    "scipy",
+    "tiktoken",
+    "torch",
+    "ConfigSpace",
+    "pymoo==0.6.0",
+    "paretoset",
+    "google-generativeai",
+    "groq",
+    "whittle",
+    "accelerate",
+    "seaborn",
+    "autoawq",
+]
+
+[project.scripts]
+hollm = "main:main"
+
+[project.optional-dependencies]
+dev = [
+    "aiohttp",
+    "aeon",
+    "black",
+    "botorch",
+    "empirical-attainment-func",
+    "fastparquet",
+    "platypus-opt",
+    "scikit-posthocs",
+    "syne-tune",
+    "tabpfn",
+    "uv",
+]
+
+[tool.setuptools]
+packages = ["mohollm"]

@@ -1,0 +1,17 @@
+Previously Evaluated Configurations:
+$Region_ICL_examples
+
+Predict performance for these configurations:
+$target_architectures
+
+Task:
+1. Predict the $metrics value for each candidate configuration
+2. Base your predictions on patterns in the reference examples
+
+Format:
+Each evaluation has to follow this format:
+
+$surrogate_model_response_format
+
+Provide your response in a JSON list containing each proposed evaluation.
+Return only the required JSON list output without additional text.

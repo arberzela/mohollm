@@ -1,0 +1,35 @@
+
+# Multi-objective optimization task
+
+## Problem Description
+You are tasked with solving a multi-objective optimization problem that requires finding solutions balancing two objectives.
+
+- **Representation**: Each architecture is encoded as a sequence of floating point numbers
+  x0, x2, .... x9
+
+- **Evaluation**: Architectures are measured by $metrics (lower is better)
+
+## Constraints
+The allowable ranges for the hyperparameters are:
+$region_constraints
+
+## Previously Evaluated Architectures
+Below are examples of architectures that have been evaluated, showing their operations and performance metrics:
+
+$Region_ICL_examples
+
+
+
+## Your Task
+Generate $target_number_of_candidates new architecture configurations that:
+1. Are likely to achieve lower $metrics than the examples
+2. Are different from all previously evaluated architectures
+3. Satisfy all the specified constraints
+
+## Output Format
+Each configuration has to follow this format:
+
+$candidate_sampler_response_format
+
+Provide your response in a JSON list containing each proposed configuration.
+Return only the required JSON list output without additional text.

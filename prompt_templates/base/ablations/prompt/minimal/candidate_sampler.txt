@@ -1,0 +1,15 @@
+Previously Evaluated Configurations:
+$Region_ICL_examples
+
+Generate $target_number_of_candidates new configurations that:
+1. Are likely to achieve lower $metrics than the examples
+2. Are different from all previously evaluated configurations
+3. Satisfy all the specified constraints: $region_constraints
+
+Format:
+Each configuration has to follow this format:
+
+$candidate_sampler_response_format
+
+Provide your response in a JSON list containing each proposed configuration.
+Return only the required JSON list output without additional text.

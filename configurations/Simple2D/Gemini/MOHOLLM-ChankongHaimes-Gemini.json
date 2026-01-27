@@ -1,0 +1,60 @@
+{
+    "method_name": "MOHOLLM (Gemini 2.0 Flash)",
+    "llm_settings": {
+      "model": "gemini-2.0-flash",
+      "input_cost_per_1000_tokens": 0.000100,
+      "output_cost_per_1000_tokens": 0.000400,
+      "max_requests_per_minute": 2000,
+      "max_tokens_per_minute": 4000000
+    },
+    "optimization_method": "SpacePartitioning",
+    "space_partitioning_settings": {
+        "partitions_per_trial": 5,
+        "use_clustering": false,
+        "region_acquisition_strategy": "ScoreRegionRHVC",
+        "partitioning_strategy": "kdtree",
+        "scheduler_settings": {
+            "scheduler": "COSINE_ANNEALING_SCHEDULER",
+            "alpha_min": 0.01,
+            "alpha_max": 1.0,
+            "restart_interval": 100
+        },
+        "adaptive_leaf_settings": {
+            "m0": 5,
+            "lam": 0,
+            "use_dimension_scaling": false
+        }
+    },
+    "top_k": 4,
+    "n_trials": 15,
+    "total_trials": 15,
+    "initial_samples": 5,
+    "candidates_per_request": 5,
+    "max_candidates_per_trial": 5,
+    "evaluations_per_request": 5,
+    "max_evaluations_per_trial": 5,
+    "max_context_configs": 110,
+    "benchmark": "ChankongHaimes",
+    "benchmark_settings": {
+    },
+    "range_parameter_keys": ["x", "y"],
+    "integer_parameter_keys": [],
+    "float_parameter_keys": ["x", "y"],
+    "parameter_constraints": {
+        "x": [-20.0, 20.0],
+        "y": [-20.0, 20.0]
+    },
+    "warmstarter": "RANDOM_WARMSTARTER",
+    "candidate_sampler": "LLM_SAMPLER",
+    "acquisition_function": "HypervolumeImprovement",
+    "surrogate_model": "LLM_SUR_BATCH",
+    "shuffle_icl_columns": false,
+    "shuffle_icl_rows": true,
+    "use_few_shot_examples": true,
+    "context_limit_strategy": "LastN",
+    "warmstarting_prompt_template": "./prompt_templates/base/partitioning/warmstarting.txt",
+    "candidate_sampler_prompt_template": "./prompt_templates/base/partitioning/candidate_sampler.txt",
+    "surrogate_model_prompt_template": "./prompt_templates/base/partitioning/surrogate_model.txt",
+    "metrics": ["F1", "F2"],
+    "metrics_targets": ["min", "min"]
+}

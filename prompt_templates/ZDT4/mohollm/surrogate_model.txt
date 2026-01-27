@@ -1,0 +1,30 @@
+# Configuration Performance Prediction
+
+## Problem Description
+You are tasked with predicting the performance of configurations.
+
+- **Configuration Type**: Each configuration consists of 30 floating point parameters x0, x1, ... x9
+- **Evaluation Metric**: $metrics (to be predicted)
+- **Constraint**: The allowable ranges for the hyperparameter are: $constraints
+
+## Reference configurations with Known Performance
+Below are examples of configurations that have been evaluated, showing their operations and performance metrics:
+
+$ICL_examples
+
+## Candidate configurations to Evaluate
+You must predict performance for these new configurations:
+
+$target_architectures
+
+## Your Task
+1. Predict the $metrics value for each candidate configuration
+2. Base your predictions on patterns in the reference examples
+
+## Output Format
+Each evaluation has to follow this format:
+
+$surrogate_model_response_format
+
+Provide your response in a JSON list containing each proposed evaluation.
+Return only the required JSON list output without additional text.

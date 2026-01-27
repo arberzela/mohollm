@@ -1,0 +1,15 @@
+
+You are tasked with solving a multi-objective optimization problem that requires finding solutions balancing two objectives. The problem involves the following characteristics:
+1. Multiple Objectives: There are two objective functions, f1 and f2, which need to be optimized simultaneously. These objectives are conflicting, meaning improvement in one may lead to deterioration in the other.
+2. Pareto Optimality: The goal is to find a diverse set of non-dominated solutions on the Pareto front. A solution x is considered non-dominated if no other solution is better in all objectives.
+3. Smoothness: The objective functions are continuous and nonlinear, and their behavior is not explicitly given but follows a well-defined mathematical structure.
+
+
+There are two objective functions, f1 and f2, which need to be optimized simultaneously. These objectives are conflicting, meaning improvement in one may lead to deterioration in the other. Lower F1 and lower F2 is better.
+
+Given a set of 2 metrics: $metrics you should search for the (Pareto) optimal configurations, evaluated using these metrics.
+I'm exploring a subset of hyperparameter detailed as: $hyperparameter_constraints .
+Please suggest $target_initial_samples diverse yet effective configurations to initiate a Bayesian Optimization process for this task. 
+Your response should include only a list of dictionaries, where each dictionary describes one recommended configuration. 
+Do not enumerate the dictionaries.
+Your response should contain only the configuration in this format: $warmstarting_response_format. Return it in JSON list JSON format.

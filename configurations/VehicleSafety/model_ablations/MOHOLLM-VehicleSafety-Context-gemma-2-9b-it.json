@@ -1,0 +1,49 @@
+{
+    "method_name": "mohollm (gemma-2-9b-it) (Context)",
+        "llm_settings": {
+            "model": "google/gemma-2-9b-it-fast",
+            "input_cost_per_1000_tokens": 0.00003,
+            "output_cost_per_1000_tokens": 0.00009,
+            "max_requests_per_minute": 600,
+            "max_tokens_per_minute": 500000
+        },
+    "optimization_method": "mohollm",
+    "top_k": 4,
+    "n_trials": 13,
+    "total_trials": 13,
+    "initial_samples": 5,
+    "candidates_per_request": 20,
+    "max_candidates_per_trial": 20,
+    "evaluations_per_request": 20,
+    "max_evaluations_per_trial": 20,
+    "max_context_configs": 110,
+    "benchmark": "vehicle_safety",
+    "benchmark_settings": {
+    },
+    "range_parameter_keys": ["x0", "x1", "x2", "x3", "x4"],
+    "integer_parameter_keys": [],
+    "float_parameter_keys": ["x0", "x1", "x2", "x3", "x4"],
+    "parameter_constraints": {
+        "x0": [1.0, 3.0],
+        "x1": [1.0, 3.0],
+        "x2": [1.0, 3.0],
+        "x3": [1.0, 3.0],
+        "x4": [1.0, 3.0]
+    },
+    "warmstarter": "RANDOM_WARMSTARTER",
+    "candidate_sampler": "LLM_SAMPLER",
+    "acquisition_function": "HypervolumeImprovement",
+    "surrogate_model": "LLM_SUR_BATCH",
+    "shuffle_icl_columns": false,
+    "shuffle_icl_rows": true,
+    "use_few_shot_examples": false,
+    "context_limit_strategy": "LastN",
+    "warmstarting_prompt_template": "./prompt_templates/base/vanilla/warmstarting.txt",
+    "candidate_sampler_prompt_template": "./prompt_templates/base/vanilla/candidate_sampler.txt",
+    "surrogate_model_prompt_template": "./prompt_templates/base/vanilla/surrogate_model.txt",
+    "metrics": ["F1", "F2", "F3"],
+    "metrics_targets": ["min", "min", "min"],
+    "prompt": {
+        "description": "Your task is to optimize the design of a vehicle for frontal crash safety by adjusting the material thickness of five key structural components. You will generate a configuration for: x0, the bumper beam that absorbs initial impact; x1, the crash box designed to crush progressively; x2, the main longitudinal rails that channel energy; x3, the A-pillar that protects the cabin integrity; and x4, the dash panel that prevents intrusion into the legroom area. The performance of your design will be evaluated against three competing objectives to be minimized: F1 is the total vehicle mass, F2 is the chest injury criterion, and F3 is the toe board intrusion. Your goal is to propose designs that find the best trade-off between minimizing weight, occupant injury, and structural deformation."
+    }
+}

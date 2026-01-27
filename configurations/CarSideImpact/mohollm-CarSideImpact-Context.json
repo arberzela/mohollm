@@ -1,0 +1,51 @@
+{
+    "method_name": "mohollm (Gemini 2.0 Flash)",
+    "llm_settings": {
+      "model": "gemini-2.0-flash",
+      "input_cost_per_1000_tokens": 0.000100,
+      "output_cost_per_1000_tokens": 0.000400,
+      "max_requests_per_minute": 2000,
+      "max_tokens_per_minute": 4000000
+    },
+    "optimization_method": "mohollm",
+    "top_k": 4,
+    "n_trials": 13,
+    "total_trials": 13,
+    "initial_samples": 5,
+    "candidates_per_request": 20,
+    "max_candidates_per_trial": 20,
+    "evaluations_per_request": 20,
+    "max_evaluations_per_trial": 20,
+    "max_context_configs": 110,
+    "benchmark": "car_side_impact",
+    "benchmark_settings": {
+    },
+    "range_parameter_keys": ["x0", "x1", "x2", "x3", "x4", "x5", "x6"],
+    "integer_parameter_keys": [],
+    "float_parameter_keys": ["x0", "x1", "x2", "x3", "x4", "x5", "x6"],
+    "parameter_constraints": {
+        "x0": [0.5, 1.5],
+        "x1": [0.45, 1.35],
+        "x2": [0.5, 1.5],
+        "x3": [0.5, 1.5],
+        "x4": [0.875, 2.625],
+        "x5": [0.4, 1.2],
+        "x6": [0.4, 1.2]
+    },
+    "warmstarter": "RANDOM_WARMSTARTER",
+    "candidate_sampler": "LLM_SAMPLER",
+    "acquisition_function": "HypervolumeImprovement",
+    "surrogate_model": "LLM_SUR_BATCH",
+    "shuffle_icl_columns": false,
+    "shuffle_icl_rows": true,
+    "use_few_shot_examples": false,
+    "context_limit_strategy": "LastN",
+    "warmstarting_prompt_template": "./prompt_templates/base/vanilla/warmstarting.txt",
+    "candidate_sampler_prompt_template": "./prompt_templates/base/vanilla/candidate_sampler.txt",
+    "surrogate_model_prompt_template": "./prompt_templates/base/vanilla/surrogate_model.txt",
+    "metrics": ["F1", "F2", "F3", "F4"],
+    "metrics_targets": ["min", "min", "min", "min"],
+    "prompt": {
+        "description": "Your task is to propose optimal designs for a vehicle to improve its safety in a side-impact collision. You will generate a configuration of seven input variables representing the thickness of key structural components: x0 (B-Pillar inner), x1 (B-Pillar reinforcement), x2 (floor side inner), x3 (cross-member), x4 (door beam), x5 (door beltline reinforcement), and x6 (roof rail). The performance of your design will be judged on four objectives, all of which should be minimized: F1 is the vehicle's total weight, F2 is the injury load on the occupant's abdomen, F3 is the intrusion velocity at key points, and F4 is a penalty for any constraint violations. Your goal is to find designs that represent the best possible trade-offs across these competing safety and engineering metrics."
+    }
+}

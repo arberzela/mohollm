@@ -1,0 +1,31 @@
+# Optimization task
+
+## Problem Description
+You are tasked with solving a optimization problem that requires finding optimal solutions.
+
+- **Evaluation**: Configurations are measured by $metrics
+
+$description
+
+## Constraints
+The allowable ranges for the hyperparameters are:
+$constraints
+
+## Previously Evaluated configurations
+Below are examples of configurations that have been evaluated, showing their operations and performance metrics:
+
+$ICL_examples
+
+## Your Task
+Generate $target_number_of_candidates new configurations that:
+1. Are likely to achieve lower $metrics than the examples
+2. Are different from all previously evaluated configurations
+3. Satisfy all the specified constraints: $constraints
+
+## Output Format
+Each configuration has to follow this format:
+
+$candidate_sampler_response_format
+
+Provide your response in a JSON list containing each proposed configuration.
+Return only the required JSON list output without additional text.

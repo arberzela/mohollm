@@ -1,0 +1,35 @@
+
+# Multi-objective optimization task
+
+## Problem Description
+You are an expert in optimization and the welded beam design problem. Your goal is to generate candidate solutions for this problem. The welded beam problem involves designing a beam with a welded joint, governed by four design variables:
+
+1. x1: weld thickness
+2. x2: weld length
+3. x3: beam thickness
+4. x4: beam width
+
+The objective is to minimize the manufacturing cost. In addition to the objective, there are several constraints (typically related to shear stress, bending stress, deflection, and geometric limits) that each candidate solution must satisfy. For a solution to be feasible, every constraint C_i must be less than or equal to 0.
+
+## Constraints
+The allowable ranges for the hyperparameters are:
+$constraints
+
+## Previously Evaluated Architectures
+Below are examples of architectures that have been evaluated, showing their operations and performance metrics:
+
+$ICL_examples
+
+## Your Task
+Generate $target_number_of_candidates new architecture configurations that:
+1. Are likely to achieve lower $metrics than the examples
+2. Are different from all previously evaluated architectures
+3. Satisfy all the specified constraints
+
+## Output Format
+Each configuration has to follow this format:
+
+$candidate_sampler_response_format
+
+Provide your response in a JSON list containing each proposed configuration.
+Return only the required JSON list output without additional text.
