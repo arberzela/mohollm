@@ -6,38 +6,22 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from normalize_data_nb201 import normalize_data_nb201
-from pymoo.indicators.hv import HV
 from plot_settings import get_color, LINE_STYLE_HV, LABEL_MAP_HV
-
-# Use LaTeX for text rendering
-plt.rcParams.update(
-    {
-        "text.usetex": True,
-        "font.family": "serif",
-        "font.serif": ["Computer Modern Roman"],
-        "font.size": 11,
-        "axes.labelsize": 12,
-        "axes.titlesize": 12,
-        "legend.fontsize": 8,
-        "xtick.labelsize": 10,
-        "ytick.labelsize": 10,
-    }
+from plot_common import (
+    PlotStyle,
+    compute_hypervolume,
+    convert_data_to_hv_over_time,
+    normalize_data as norm_data,
+    apply_axis_style,
+    set_axis_limits,
+    save_plot,
+    group_data_by_method,
+    gather_files,
+    custom_sort_key,
 )
 
-
-def compute_hypervolume(df, reference_point):
-    objectives = df.to_numpy()
-    ind = HV(ref_point=reference_point)
-    hypervolume = ind(objectives)
-    return hypervolume
-
-
-def convert_data_to_hv_over_time(fvals, reference_point=[1.0, 1.0]):
-    hypervolume = []
-    for step in range(1, len(fvals) + 1):
-        hv = compute_hypervolume(fvals.iloc[:step], reference_point)
-        hypervolume.append(hv)
-    return hypervolume
+# Apply default plotting style
+PlotStyle.apply("default")
 
 
 def create_hv_over_time_plot(data, benchmark, title, path, filename, x_lim, y_lim):
@@ -54,8 +38,8 @@ def create_hv_over_time_plot(data, benchmark, title, path, filename, x_lim, y_li
     # Create figure with appropriate size for single-column journals
     fig, ax = plt.subplots(figsize=(5, 4.5))
 
-    # Get methods and sort them alphabetically
-    methods = sorted(data["mean"].keys())
+    # Get methods and sort them using custom sort key
+    methods = sorted(data["mean"].keys(), key=custom_sort_key)
 
     for i, method in enumerate(methods):
         print(f"Plotting: {method}")
@@ -91,38 +75,32 @@ def create_hv_over_time_plot(data, benchmark, title, path, filename, x_lim, y_li
     ax.set_ylabel("Hypervolume")
     ax.set_title(title)
 
-    if x_lim:
-        ax.set_xlim(float(x_lim[0]), float(x_lim[1]))
-    if y_lim:
-        ax.set_ylim(float(y_lim[0]), float(y_lim[1]))
-
-    # Improve grid appearance
-    ax.grid(True, linestyle="--", alpha=0.6, linewidth=0.4)
+    # Set axis limits using utility function
+    set_axis_limits(ax, x_lim, y_lim)
+    
+    # Apply consistent axis styling
+    apply_axis_style(ax)
 
     # Format tick labels
     ax.xaxis.set_major_locator(plt.MaxNLocator(10))
     ax.yaxis.set_major_formatter(plt.FuncFormatter(lambda x, _: f"{x:.2f}"))
 
     ax.legend(
-        # 'upper center' is the location within the bounding box
-        # 'bbox_to_anchor' places that bounding box outside the plot axes
         loc="upper center",
-        bbox_to_anchor=(0.5, -0.2),  # (x, y) position. y < 0 places it below the plot.
+        bbox_to_anchor=(0.5, -0.2),
         frameon=True,
         framealpha=0.95,
         edgecolor="k",
         fancybox=False,
-        ncol=3,  # Use multiple columns to keep it compact
+        ncol=3,
     )
 
     plt.tight_layout()
 
-    for file_type in ["svg", "pdf", "png"]:
-        dir_path = f"{path}/{file_type}/{filename}.{file_type}"
-        os.makedirs(os.path.dirname(dir_path), exist_ok=True)
-        plt.savefig(dir_path, dpi=300, bbox_inches="tight")
-
-    plt.close()
+    # Save plot using utility function
+    save_plot(fig, path, filename, formats=["svg", "pdf", "png"])
+    
+    return fig
 
 
 def main():
@@ -226,14 +204,12 @@ def main():
     print(f"Blacklist:   {blacklist}")
     print(f"Whitelist:   {whitelist}\n")
 
-    # Gather all CSV files from folder
-    file_names = glob.glob(f"{data_path}/**/*.csv", recursive=True)
-    observed_fvals_files = [
-        file for file in file_names if "observed_fvals" in file.split("/")
-    ]
+    # Gather all CSV files using utility function
+    observed_fvals_files = gather_files(data_path, "observed_fvals*.csv", filter)
 
-    # Group the files names into a dict of {method_name: [list of file names]}
+    # Group the files by method using utility function
     method_files = group_data_by_method(observed_fvals_files, filter)
+    
     # 1. Convert to pandas DataFrames
     method_dfs = {
         method: [pd.read_csv(file, usecols=columns)[:trials] for file in files]
@@ -342,52 +318,8 @@ def normalize_data(fvals, min_max_metrics):
     return fvals
 
 
-def extract_method_name(files):
-    """
-    If everything is correct the methods name should be the third to last element in the path
-    """
-    methods = []
-    for file in files:
-        method = file.split("/")[-3]
-        if method not in methods:
-            methods.append(method)
-    return methods
-
-
-def group_data_by_method(observed_fvals_files, filter):
-    """
-    Groups a list of file paths by method names extracted from the file paths.
-    Args:
-        observed_fvals_files (list of str): List of file paths to be grouped.
-        filter (str): Optional filter string to include only files containing this substring.
-    Returns:
-        dict: A dictionary where keys are method names and values are lists of file paths
-              corresponding to each method.
-    Example:
-        observed_fvals_files = [
-            "/path/to/method1/file1.txt",
-            "/path/to/method2/file2.txt",
-            "/path/to/method1/file3.txt"
-        ]
-        filter = "file"
-        result = group_data_by_method(observed_fvals_files, filter)
-        # result will be:
-        # {
-        #     "method1": ["/path/to/method1/file1.txt", "/path/to/method1/file3.txt"],
-        #     "method2": ["/path/to/method2/file2.txt"]
-        # }
-    """
-
-    method_names = extract_method_name(observed_fvals_files)
-    method_files = {}
-    for method in method_names:
-        files = []
-        for file in observed_fvals_files:
-            # Includes file is the method name matches the file path fully (hence the split)
-            if method in file.split("/") and (filter in file if filter else True):
-                files.append(file)
-        method_files[method] = files
-    return method_files
+# Note: extract_method_name and group_data_by_method are now imported from plot_common
+# These functions have been moved to the common utilities module to reduce redundancy
 
 
 if __name__ == "__main__":
