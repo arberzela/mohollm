@@ -38,10 +38,11 @@ dependencies = [
     "paretoset",
     "google-generativeai",
     "groq",
-    "whittle",
     "accelerate",
     "seaborn",
-    "autoawq",
+    "boto3>=1.35.36",  # Required by sagemaker packages
+    "dill>=0.4.0",  # Required by pathos
+    "multiprocess>=0.70.18",  # Required by pathos
 ]
 
 [project.scripts]
@@ -61,6 +62,10 @@ dev = [
     "tabpfn",
     "uv",
 ]
+cuda = [
+    "autoawq",  # Only for Linux with CUDA; requires triton
+]
 
 [tool.setuptools]
 packages = ["mohollm"]
+py-modules = ["main", "benchmark_initialization"]

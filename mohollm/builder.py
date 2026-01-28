@@ -192,7 +192,6 @@ class Builder:
         selected_candidate_sampler.alpha = self.alpha
         selected_candidate_sampler.metrics = self.metrics
         selected_candidate_sampler.benchmark = self.benchmark
-        selected_candidate_sampler.tot_settings = self.tot_settings
         selected_candidate_sampler.prompt_builder = self.get_prompt_builder(
             template_dir=self.candidate_sampler_prompt_template_dir,
         )

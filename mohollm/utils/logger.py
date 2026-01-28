@@ -44,14 +44,12 @@ WHITELISTED_LOGGERS = list(
     "PromptBuilder",
     "STATISTICS",
     "RandomACQ",
-    "WHITTLE",
     "KDE",
     "GPT",
     "ZDT",
     "BENCHMARK",
     "SURROGATE_MODEL_BATCH",
     "HypervolumeImprovementBatch",
-    "CHECKPOINT_WARMSTARTER",
     "SpacePartitioningmohollm",
     "RegionACQ",
     "Threadedmohollm",
@@ -76,7 +74,6 @@ WHITELISTED_LOGGERS = list(
     "Kursawe",
     "qLogEHVISampler",
     "ScoreRegionACQAblations",
-    "POOL_WARMSTARTER",
         ]
     )
 )

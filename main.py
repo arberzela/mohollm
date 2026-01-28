@@ -268,29 +268,10 @@ def main():
         help="Range parameter keys. Tells the space partitioning which features should be handled as a range parameter. (default: [])",
     )
     parser.add_argument(
-        "--optimize_from_checkpoint",
-        type=str,
-        default=None,
-        help="Restart optimization from checkpoint (default=None)",
-    )
-    parser.add_argument(
         "--use_few_shot_examples",
         type=bool,
         default=False,
         help="Whether to use few shot examples (default: False)",
-    )
-
-    parser.add_argument(
-        "--tot_settings",
-        type=dict,
-        default={},
-        help="Settings for the tot optimization method (default: empty dict)",
-    )
-    parser.add_argument(
-        "--interval_settings",
-        type=dict,
-        default={},
-        help="Settings for the tot optimization method (default: empty dict)",
     )
 
     args = parser.parse_args()
@@ -325,10 +306,7 @@ def load_config(args):
         "benchmark": args.benchmark,
         "method_name": args.method_name,
         "benchmark_settings": args.benchmark_settings,
-        # "benchmark_settings": json.loads(args.benchmark_settings),
         "warmstarter_settings": args.warmstarter_settings,
-        "tot_settings": args.tot_settings,
-        "interval_settings": args.interval_settings,
         "seed": args.seed,
         "max_context_configs": args.max_context_configs,
         "max_requests_per_minute": args.max_requests_per_minute,
@@ -347,7 +325,6 @@ def load_config(args):
         "metrics": args.metrics,
         "metrics_targets": args.metrics_targets,
         "range_parameter_keys": args.range_parameter_keys,
-        "optimize_from_checkpoint": args.optimize_from_checkpoint,
         "use_few_shot_examples": args.use_few_shot_examples,
         "input_cost_per_1000_tokens": args.input_cost_per_1000_tokens,
         "output_cost_per_1000_tokens": args.output_cost_per_1000_tokens,

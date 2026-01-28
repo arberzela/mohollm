@@ -44,8 +44,6 @@ from mohollm.candidate_sampler.random_search_sampler import RandomSearchSampler
 from mohollm.candidate_sampler.qLogEHVI_sampler import qLogEHVISampler
 from mohollm.warmstarter.random_warmstarter import RANDOM_WARMSTARTER
 from mohollm.warmstarter.zero_shot_warmstarter import ZERO_SHOT_WARMSTARTER
-from mohollm.warmstarter.checkpoint_warmstarter import CHECKPOINT_WARMSTARTER
-from mohollm.warmstarter.pool_warmstarter import POOL_WARMSTARTER
 from mohollm.statistics.context_limit_strategy.lastN import LastN
 from mohollm.statistics.context_limit_strategy.random import Random
 from mohollm.schedulers.constant_scheduler import ConstantScheduler
@@ -91,8 +89,6 @@ MODELS = {
 WARMSTARTERS = {
     "RANDOM_WARMSTARTER": RANDOM_WARMSTARTER,
     "ZERO_SHOT_WARMSTARTER": ZERO_SHOT_WARMSTARTER,
-    "CHECKPOINT_WARMSTARTER": CHECKPOINT_WARMSTARTER,
-    "POOL_WARMSTARTER": POOL_WARMSTARTER,
 }
 CANDIDATE_SAMPLERS = {
     "LLM_SAMPLER": LLM_SAMPLER,

@@ -34,7 +34,6 @@ class CANDIDATE_SAMPLER(ABC):
         self.max_candidates_per_trial = None
         self.alpha = None
         self.metrics = None
-        self.tot_settings: Dict = {}
         self.range_parameter_keys: List[str] = None
         self.config_space: Dict = None
 
