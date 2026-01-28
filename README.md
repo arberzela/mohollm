@@ -1,16 +1,6 @@
 # LLM-based Global Optimization with Search Space Partitioning
 
-This repository accompanies the paper "[Improving LLM-based Global Optimization with Search Space Partitioning](https://openreview.net/forum?id=y6nhcCdQYd)" (ICLR 2026) and the related arXiv preprint "[Multi-objective Hierarchical Optimization with Large Language Models](https://arxiv.org/pdf/2601.13892)".
-
-A compact guide to install, configure, and run HOLLM (requires Python 3.11).
-
-## Quick overview
-HOLLM uses LLMs to help with global optimization by partitioning the search space. This README focuses on getting you up and running quickly and troubleshooting common issues.
-
-## Prerequisites
-- Python 3.11
-- Git (to clone repository)
-- Optional: conda for environment management
+This repository accompanies the paper "[Improving LLM-based Global Optimization with Search Space Partitioning](https://openreview.net/forum?id=y6nhcCdQYd)" (ICLR 2026) and the related arXiv preprint "[Multi-objective Hierarchical Optimization with Large Language Models](https://arxiv.org/pdf/2601.13892)". (MO)HOLLM use LLMs to help with global optimization by partitioning the search space.
 
 ## 1) Installation (recommended via conda)
 1. Create and activate environment:
@@ -94,13 +84,9 @@ pytest -q
 - Open issues or PRs for bugs and feature requests.
 - Follow repository code style and tests for contributions.
 
-## 10) References
-- See `benchmark_initialization.py` and `configurations/` for configuration examples and advanced usage.
-- For model-specific issues consult the provider docs (OpenAI, Google, Hugging Face, Groq).
-
 ## BibTeX
 
-If you use this work, you can cite related resources with the following BibTeX entries:
+If you use this work, please cite related resources with the following BibTeX entries:
 
 ```bibtex
 @inproceedings{schwanke2026improving,
